@@ -1,40 +1,52 @@
+# currently no cmdline client, run with "coffee coffeeloader.coffee"
+
+# listen on every available IP
+ip = "0.0.0.0"
+
+# listen port
+port = 8080
+
 coffee = require('coffee-script')
 http = require('http')
 fs = require('fs')
 url = require('url')
 log4js = require('log4js')
 
+# Bitmask-style object to specify the source process steps
 processMode =
 	crypt: 1
 	minify: 2
 	obfuscate: 4
 	pack: 8
 
+# sample profile
+# TODO needs to put into a folder
 profile =
 	name: "debug"
 	access: "public"
 	mode: processMode.obfuscate | processMode.minify
 
+# basic logger if no custom is set
 
-
+log = log4js.getLogger("coffeeloader MAIN")
+# create webserver and register our ldrRequest handle
 instance = http.createServer (request, response)  ->
 	try
-			# split path/file into an array 
-			req = new ldrRequest(request, response)
+			req = new coffeeloader(request, response)
+	catch err
+			log.error err
 
-instance.listen 1337, "0.0.0.0"
-log = log4js.getLogger("ldr")
+instance.listen port, ip
+log.info "Server running at http://#{ip}:#{port}/"
 
-log.info('Server running at http://127.0.0.1:1337/')
-
-class ldrRequest
+class coffeeloader
 	@log = null
 	@request = null
 	@response = null
 
 	constructor:	(@request, @response) ->
-		@log = log4js.getLogger("ldrRequest")
-		@log.debug "ldrRequest created, Url #{@request.url}"
+		@log = log4js.getLogger("coffeeloader")
+		@log.debug "coffeeloader created, Url #{@request.url}"
 		@openFile()
 		
 	openFile: () ->
