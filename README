@@ -1,0 +1,17 @@
+coffeeloader
+============
+
+Disclaimer: coffeeloader IS CURRENTLY UNDER DEVELOPMENT AND NOT USABLE YET.
+DEVELOPERS WELCOME.
+
+coffeeloader is a node.js http server which aims at delivering CoffeeScript and
+JavaScript files on-thy-fly. The source is optionally compiled, minified,
+obfuscated or crypted, depending on user-generated profiles. Additional assembly
+of the script based on newly introduced special formated comment-syntax can be
+done.
+
+For details of the full features and how to use, see the GitHub page of this
+project located at
+
+	https://github.com/Dynalon/coffeeloader
+	https://github.com/Dynalon/coffeeloader/wiki
