@@ -106,7 +106,7 @@ class script
 				@log.debug "file open successfull, parsing file"
 				@parse(data, callback)
 
-	# returns a the encoded/crypted source as string	
+	# returns the encoded/crypted source as string	
 	# callback is of (err, string)
 	parse: (src, callback) ->
 		@processor = new scriptProcessorJS() if @type == "js"
@@ -125,7 +125,7 @@ class script
 
 # abstract class, do not create an instance 
 class scriptProcessor
-	@log = log4js.getLogger('scriptProcessorJS')
+	@log = log4js.getLogger('scriptProcessorAbstract')
 	obfuscate: (code) =>
 		return code
 	minify: (code) ->
